@@ -1,19 +1,54 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styles from "./Searchbar.module.css";
+import { toast } from "react-toastify";
+import propTypes from "prop-types";
 
-//styles
-// import s from './SearchBar.module.css';
+export default class Searchbar extends Component {
+  state = {
+    request: "",
+  };
 
-class SearchBar extends Component {
-    render() {
-        return (
-            <button type='button'></button>
-        )
+  static propTypes = {
+    onSubmit: propTypes.func.isRequired,
+  };
+
+  handleRequestChange = (event) => {
+    this.setState({ request: event.currentTarget.value.toLowerCase() });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (this.state.request.trim() === "") {
+      toast.error("Please enter your request");
+      return;
     }
-}
-// eslint-disable-next-line react/no-typos
-// SearchBar.PropTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
+    
+    this.props.onSubmit(this.state.request);
+    this.setState({ request: "" });
+  };
 
-export default SearchBar;
+  render() {
+    return (
+      <header className={styles.Searchbar}>
+        <form className={styles.SearchForm} onSubmit={this.handleSubmit}>
+        
+            <button type="submit" className={styles.SearchFormButton}>
+              <span className={styles.SearchFormButtonLabel}>Search</span>
+            </button>
+          
+          <input
+            className={styles.SearchFormInput}
+            name="request"
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+            value={this.state.request}
+            onChange={this.handleRequestChange}
+          />
+        </form>
+      </header>
+    );
+  }
+}

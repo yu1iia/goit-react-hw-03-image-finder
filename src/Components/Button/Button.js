@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import styles from "./Button.module.css";
 
-//styles
-// import s from './Button.module.css';
+import classNames from "classnames";
 
-class Button extends Component {
-    render() {
-        return (
-            <button type='button'></button>
-        )
-    }
+const Button = ({ addPage }) => {
+  return (
+    
+    <button
+      type="button"
+      className={classNames(styles.Button, styles.ButtonPosition)}
+      onClick={addPage}
+    >
+      Load more
+    </button>
+  
+  );
+  
 }
-// eslint-disable-next-line react/no-typos
-Button.PropTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
-
 export default Button;

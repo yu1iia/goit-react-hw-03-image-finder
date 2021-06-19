@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import styles from "./ImageGalleryItem.module.css";
+import propTypes from "prop-types";
 
-//styles
-// import s from './ImageGalleryItem.module.css';
+const ImageGalleryItem = ({ imageData }) => {
+  const { largeImageURL, tags } = imageData;
+  return (
+    <li className={styles.ImageGalleryItem}>
+      <img src={largeImageURL} alt={tags} className={styles.image} />
+    </li>
+  );
+};
 
-class ImageGalleryItem extends Component {
-    render() {
-        return (
-            <button type='button'></button>
-        )
-    }
-}
-// eslint-disable-next-line react/no-typos
-ImageGalleryItem.PropTypes = {
-  onSubmit: PropTypes.func.isRequired,
+ImageGalleryItem.propTypes = {
+  imageData: propTypes.object.isRequired,
 };
 
 export default ImageGalleryItem;
